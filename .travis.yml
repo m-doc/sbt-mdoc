@@ -1,0 +1,24 @@
+language: scala
+scala:
+- 2.10.6
+jdk:
+- oraclejdk7
+- oraclejdk8
+sudo: false
+addons:
+  apt:
+    packages:
+    - graphviz
+cache:
+  directories:
+  - "$HOME/.ivy2/cache"
+  - "$HOME/.sbt/boot/"
+script:
+- sbt ++$TRAVIS_SCALA_VERSION test
+notifications:
+  webhooks:
+    urls:
+    - https://webhooks.gitter.im/e/13627e9a6e8fa0dec084 # m-doc/general
+    on_success: change
+    on_failure: always
+    on_start: never
