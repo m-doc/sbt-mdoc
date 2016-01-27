@@ -3,6 +3,7 @@ enablePlugins(GitVersioning)
 name := "sbt-mdoc"
 organization := "org.m-doc"
 bintrayOrganization := Some("m-doc")
+licenses += "Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")
 
 sbtPlugin := true
 scalaVersion := "2.10.6"
