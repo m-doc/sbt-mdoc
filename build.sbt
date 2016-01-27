@@ -10,3 +10,6 @@ scalaVersion := "2.10.6"
 addSbtPlugin("me.lessis" % "bintray-sbt" % "0.3.0")
 
 git.useGitDescribe := true
+
+publishMavenStyle := false
+bintrayRepository := "sbt-plugins"
