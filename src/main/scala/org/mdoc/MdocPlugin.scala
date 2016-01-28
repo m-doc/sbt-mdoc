@@ -1,13 +1,13 @@
 package org.mdoc
 
 import bintray.{ BintrayKeys, BintrayPlugin }
-import com.typesafe.sbt.GitVersioning
 import com.typesafe.sbt.SbtGit.git
+import com.typesafe.sbt.{ GitVersioning, SbtScalariform }
 import sbt.{ AutoPlugin, Keys }
 
 object MdocPlugin extends AutoPlugin {
 
-  override def requires = BintrayPlugin && GitVersioning
+  override def requires = BintrayPlugin && GitVersioning && SbtScalariform
 
   override lazy val projectSettings = Seq(
     Keys.homepage := Some(sbt.url("https://github.com/m-doc/" + Keys.name.value)),
