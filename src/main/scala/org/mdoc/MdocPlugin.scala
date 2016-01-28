@@ -2,7 +2,7 @@ package org.mdoc
 
 import bintray.{ BintrayKeys, BintrayPlugin }
 import com.typesafe.sbt.GitVersioning
-import com.typesafe.sbt.SbtGit.GitKeys
+import com.typesafe.sbt.SbtGit.git
 import sbt.{ AutoPlugin, Keys }
 
 object MdocPlugin extends AutoPlugin {
@@ -15,6 +15,6 @@ object MdocPlugin extends AutoPlugin {
     Keys.organization := "org.m-doc",
     Keys.publishMavenStyle := true,
     BintrayKeys.bintrayOrganization := Some("m-doc"),
-    GitKeys.useGitDescribe := true
+    git.useGitDescribe := true
   )
 }
