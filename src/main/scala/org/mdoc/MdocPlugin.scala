@@ -14,6 +14,21 @@ object MdocPlugin extends AutoPlugin {
     Keys.licenses += "Apache-2.0" -> sbt.url("http://www.apache.org/licenses/LICENSE-2.0"),
     Keys.organization := "org.m-doc",
     Keys.publishMavenStyle := true,
+    Keys.scalacOptions ++= Seq(
+      "-deprecation",
+      "-encoding", "UTF-8",
+      "-feature",
+      "-language:existentials",
+      "-language:higherKinds",
+      "-language:implicitConversions",
+      "-unchecked",
+      "-Xfatal-warnings",
+      "-Xfuture",
+      "-Xlint",
+      "-Yno-adapted-args",
+      "-Ywarn-numeric-widen",
+      "-Ywarn-value-discard"
+    ),
     BintrayKeys.bintrayOrganization := Some("m-doc"),
     git.useGitDescribe := true
   )
