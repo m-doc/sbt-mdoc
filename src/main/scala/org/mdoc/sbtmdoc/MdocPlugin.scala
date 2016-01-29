@@ -5,10 +5,12 @@ import com.typesafe.sbt.SbtGit.git
 import com.typesafe.sbt.{ GitVersioning, SbtScalariform }
 import sbt._
 import sbtbuildinfo.{ BuildInfoKey, BuildInfoKeys, BuildInfoPlugin }
+import scoverage.ScoverageSbtPlugin
 
 object MdocPlugin extends AutoPlugin {
 
-  override def requires = BintrayPlugin && BuildInfoPlugin && GitVersioning && SbtScalariform
+  override def requires = BintrayPlugin && BuildInfoPlugin && GitVersioning &&
+    SbtScalariform && ScoverageSbtPlugin
 
   object autoImport {
     object Version {
@@ -50,6 +52,7 @@ object MdocPlugin extends AutoPlugin {
       Some(s"scm:git:${gitDevUrl(Keys.name.value)}")
     )),
     BintrayKeys.bintrayOrganization := Some("m-doc"),
+    BuildInfoKeys.buildInfoPackage := rootPackage.value,
     BuildInfoKeys.buildInfoKeys := Seq[BuildInfoKey](
       Keys.name,
       Keys.version,
