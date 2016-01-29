@@ -1,4 +1,4 @@
-package org.mdoc
+package org.mdoc.sbtmdoc
 
 import bintray.{ BintrayKeys, BintrayPlugin }
 import com.typesafe.sbt.SbtGit.git
@@ -10,7 +10,20 @@ object MdocPlugin extends AutoPlugin {
 
   override def requires = BintrayPlugin && BuildInfoPlugin && GitVersioning && SbtScalariform
 
+  object autoImport {
+    object Version {
+      val scalacheck = "1.12.5"
+      val scalaz = "7.1.6"
+      val scodecBits = "1.0.12"
+    }
+
+    val rootPackage = settingKey[String]("root package")
+  }
+  import autoImport._
+
   override lazy val projectSettings = Seq(
+    rootPackage := s"${Keys.organization.value}.${Keys.name.value}".replaceAll("-", ""),
+    Keys.initialCommands := s"import ${rootPackage.value}._",
     Keys.homepage := Some(githubUrl(Keys.name.value)),
     Keys.licenses += "Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0"),
     Keys.organization := "org.m-doc",
@@ -55,12 +68,4 @@ object MdocPlugin extends AutoPlugin {
 
   def gitDevUrl(projectName: String): String =
     s"git@github.com:m-doc/$projectName.git"
-
-  object autoImport {
-    object Version {
-      val scalacheck = "1.12.5"
-      val scalaz = "7.1.6"
-      val scodecBits = "1.0.12"
-    }
-  }
 }
