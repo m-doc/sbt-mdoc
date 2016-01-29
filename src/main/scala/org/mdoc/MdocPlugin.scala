@@ -41,7 +41,8 @@ object MdocPlugin extends AutoPlugin {
       Keys.name,
       Keys.version,
       Keys.scalaVersion,
-      BuildInfoKey.map(Keys.homepage) { case (k, v) => k -> v.fold("")(_.toString) }
+      BuildInfoKey.map(Keys.homepage) { case (k, v) => k -> v.fold("")(_.toString) },
+      BuildInfoKey.map(git.gitHeadCommit) { case (k, v) => k -> v.getOrElse("") }
     ),
     git.useGitDescribe := true
   )
@@ -54,4 +55,12 @@ object MdocPlugin extends AutoPlugin {
 
   def gitDevUrl(projectName: String): String =
     s"git@github.com:m-doc/$projectName.git"
+
+  object autoImport {
+    object Version {
+      val scalacheck = "1.12.5"
+      val scalaz = "7.1.6"
+      val scodecBits = "1.0.12"
+    }
+  }
 }
