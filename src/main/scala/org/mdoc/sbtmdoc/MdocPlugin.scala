@@ -14,6 +14,8 @@ object MdocPlugin extends AutoPlugin {
 
   object autoImport {
     object Version {
+      val logback = "1.1.3"
+      val http4s = "0.12.0"
       val scalacheck = "1.12.5"
       val scalaz = "7.1.6"
       val scodecBits = "1.0.12"
