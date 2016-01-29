@@ -47,6 +47,12 @@ object MdocPlugin extends AutoPlugin {
       "-Ywarn-numeric-widen",
       "-Ywarn-value-discard"
     ),
+    Keys.scalacOptions in (Compile, Keys.doc) ++= Seq(
+      "-diagrams",
+      "-diagrams-debug",
+      "-doc-source-url", githubUrl(Keys.name.value) + "/tree/master€{FILE_PATH}.scala",
+      "-sourcepath", Keys.baseDirectory.in(LocalRootProject).value.getAbsolutePath
+    ),
     Keys.scalaVersion := "2.11.7",
     Keys.scmInfo := Some(ScmInfo(
       githubUrl(Keys.name.value),
