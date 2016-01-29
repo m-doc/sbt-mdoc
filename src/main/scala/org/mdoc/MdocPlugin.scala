@@ -4,10 +4,11 @@ import bintray.{ BintrayKeys, BintrayPlugin }
 import com.typesafe.sbt.SbtGit.git
 import com.typesafe.sbt.{ GitVersioning, SbtScalariform }
 import sbt._
+import sbtbuildinfo.{ BuildInfoKey, BuildInfoKeys, BuildInfoPlugin }
 
 object MdocPlugin extends AutoPlugin {
 
-  override def requires = BintrayPlugin && GitVersioning && SbtScalariform
+  override def requires = BintrayPlugin && BuildInfoPlugin && GitVersioning && SbtScalariform
 
   override lazy val projectSettings = Seq(
     Keys.homepage := Some(githubUrl(Keys.name.value)),
@@ -36,6 +37,12 @@ object MdocPlugin extends AutoPlugin {
       Some(s"scm:git:${gitDevUrl(Keys.name.value)}")
     )),
     BintrayKeys.bintrayOrganization := Some("m-doc"),
+    BuildInfoKeys.buildInfoKeys := Seq[BuildInfoKey](
+      Keys.name,
+      Keys.version,
+      Keys.scalaVersion,
+      BuildInfoKey.map(Keys.homepage) { case (k, v) => k -> v.fold("")(_.toString) }
+    ),
     git.useGitDescribe := true
   )
 
