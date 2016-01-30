@@ -1,8 +1,9 @@
 package org.mdoc.sbtmdoc
 
 import bintray.{ BintrayKeys, BintrayPlugin }
+import com.typesafe.sbt.GitVersioning
 import com.typesafe.sbt.SbtGit.git
-import com.typesafe.sbt.{ GitVersioning, SbtScalariform }
+import com.typesafe.sbt.SbtScalariform
 import sbt._
 import sbtbuildinfo.{ BuildInfoKey, BuildInfoKeys, BuildInfoPlugin }
 import scoverage.ScoverageSbtPlugin
