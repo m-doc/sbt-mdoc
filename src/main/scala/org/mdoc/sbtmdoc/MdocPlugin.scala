@@ -22,11 +22,29 @@ object MdocPlugin extends AutoPlugin {
     }
 
     val rootPackage = settingKey[String]("root package")
+    val validateCommands = settingKey[Seq[String]]("commands that are executed by 'validate'")
   }
   import autoImport._
 
+  lazy val validateDef = Command.command("validate") { (state: State) =>
+    val extracted = Project.extract(state)
+    val commands = extracted.get(validateCommands)
+    state.copy(remainingCommands = commands)
+  }
+
   override lazy val projectSettings = Seq(
     rootPackage := s"${Keys.organization.value}.${Keys.name.value}".replaceAll("-", ""),
+    validateCommands := Seq(
+      "clean",
+      "coverage",
+      "compile",
+      "test",
+      "coverageReport",
+      "scalastyle",
+      "test:scalastyle",
+      "doc"
+    ),
+    Keys.commands += validateDef,
     Keys.initialCommands := s"import ${rootPackage.value}._",
     Keys.homepage := Some(githubUrl(Keys.name.value)),
     Keys.licenses += "Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0"),
