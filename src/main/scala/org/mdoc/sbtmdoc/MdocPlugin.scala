@@ -22,6 +22,7 @@ object MdocPlugin extends AutoPlugin {
       val scodecBits = "1.0.12"
     }
 
+    val makeBintrayCredentials = taskKey[File]("creates .bintray/.credentials if it doesn't exists")
     val rootPackage = settingKey[String]("root package")
     val validateCommands = settingKey[Seq[String]]("commands that are executed by 'validate'")
   }
@@ -34,6 +35,21 @@ object MdocPlugin extends AutoPlugin {
   }
 
   override lazy val projectSettings = Seq(
+    makeBintrayCredentials := {
+      val credentials = file(".bintray/.credentials")
+      val user = Option(System.getenv("BINTRAY_USER")).getOrElse("")
+      val pass = Option(System.getenv("BINTRAY_PASSWORD")).getOrElse("")
+      if (!credentials.exists()) {
+        val content = s"""
+          |realm = Bintray API Realm
+          |host = api.bintray.com
+          |user = $user
+          |password = $pass
+        """.stripMargin.trim
+        IO.write(credentials, content)
+      }
+      credentials
+    },
     rootPackage := s"${Keys.organization.value}.${Keys.name.value}".replaceAll("-", ""),
     validateCommands := Seq(
       "clean",
