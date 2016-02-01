@@ -15,7 +15,9 @@ cache:
 script:
 - sbt ++$TRAVIS_SCALA_VERSION validate
 after_success:
-- '[ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ] && sbt makeBintrayCredentials && sbt clean publish'
+- >
+  [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ] &&
+  sbt ++$TRAVIS_SCALA_VERSION makeBintrayCredentials reload clean publish
 notifications:
   webhooks:
     urls:
