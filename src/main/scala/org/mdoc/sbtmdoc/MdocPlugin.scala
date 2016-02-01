@@ -22,9 +22,17 @@ object MdocPlugin extends AutoPlugin {
       val scodecBits = "1.0.12"
     }
 
-    val makeBintrayCredentials = taskKey[File]("creates .bintray/.credentials if it doesn't exists")
-    val rootPackage = settingKey[String]("root package")
-    val validateCommands = settingKey[Seq[String]]("commands that are executed by 'validate'")
+    val makeBintrayCredentials =
+      taskKey[File]("Creates ~/.bintray/.credentials if it doesn't exist.")
+
+    val makeBintrayDeploymentDescriptorDeb =
+      taskKey[File]("Creates Bintray Deployment descriptor for Debian packages.")
+
+    val rootPackage =
+      settingKey[String]("Root package.")
+
+    val validateCommands =
+      settingKey[Seq[String]]("Commands that are executed by 'validate'.")
   }
   import autoImport._
 
@@ -49,6 +57,39 @@ object MdocPlugin extends AutoPlugin {
         IO.write(credentials, content)
       }
       credentials
+    },
+    makeBintrayDeploymentDescriptorDeb := {
+      val subject = BintrayKeys.bintrayOrganization.value.getOrElse("")
+      val licenses = Keys.licenses.value.map { case (name, _) => s""""$name"""" }.mkString(", ")
+      val content = s"""
+        |{
+        |  "package": {
+        |    "name": "${Keys.name.value}",
+        |    "repo": "debian",
+        |    "subject": "$subject",
+        |    "vcs_url": "${gitUrl(Keys.name.value)}",
+        |    "licenses": [ $licenses ]
+        |  },
+        |  "version": {
+        |    "name": "${Keys.version.value}"
+        |  },
+        |  "files": [
+        |    {
+        |      "includePattern": "target/(.*${Keys.version.value}.*\\.deb)",
+        |      "uploadPattern": "$$1",
+        |      "matrixParams": {
+        |        "deb_distribution": "stable",
+        |        "deb_component": "main",
+        |        "deb_architecture": "all"
+        |      }
+        |    }
+        |  ],
+        |  "publish": true
+        |}
+      """.stripMargin.trim
+      val descriptor = file("deploy.json")
+      IO.write(descriptor, content)
+      descriptor
     },
     rootPackage := s"${Keys.organization.value}.${Keys.name.value}".replaceAll("-", ""),
     validateCommands := Seq(
