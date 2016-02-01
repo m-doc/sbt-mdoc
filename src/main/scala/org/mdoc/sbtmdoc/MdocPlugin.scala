@@ -10,8 +10,10 @@ import scoverage.ScoverageSbtPlugin
 
 object MdocPlugin extends AutoPlugin {
 
-  override def requires = BintrayPlugin && BuildInfoPlugin && GitVersioning &&
+  override def requires: Plugins = BintrayPlugin && BuildInfoPlugin && GitVersioning &&
     SbtScalariform && ScoverageSbtPlugin
+
+  override def trigger: PluginTrigger = allRequirements
 
   object autoImport {
     object Version {
