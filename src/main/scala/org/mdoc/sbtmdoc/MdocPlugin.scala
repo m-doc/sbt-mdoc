@@ -67,6 +67,8 @@ object MdocPlugin extends AutoPlugin {
         |    "name": "${Keys.name.value}",
         |    "repo": "debian",
         |    "subject": "$subject",
+        |    "website_url": "${Keys.homepage.value.getOrElse("")}",
+        |    "issue_tracker_url": "${gitHubUrl(Keys.name.value)}/issues",
         |    "vcs_url": "${gitUrl(Keys.name.value)}",
         |    "licenses": [ $licenses ]
         |  },
@@ -104,7 +106,7 @@ object MdocPlugin extends AutoPlugin {
     ),
     Keys.commands += validateDef,
     Keys.initialCommands := s"import ${rootPackage.value}._",
-    Keys.homepage := Some(githubUrl(Keys.name.value)),
+    Keys.homepage := Some(gitHubUrl(Keys.name.value)),
     Keys.licenses += "Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0"),
     Keys.organization := "org.m-doc",
     Keys.publishMavenStyle := true,
@@ -127,12 +129,12 @@ object MdocPlugin extends AutoPlugin {
     Keys.scalacOptions in (Compile, Keys.doc) ++= Seq(
       "-diagrams",
       "-diagrams-debug",
-      "-doc-source-url", githubUrl(Keys.name.value) + "/tree/master€{FILE_PATH}.scala",
+      "-doc-source-url", gitHubUrl(Keys.name.value) + "/tree/master€{FILE_PATH}.scala",
       "-sourcepath", Keys.baseDirectory.in(LocalRootProject).value.getAbsolutePath
     ),
     Keys.scalaVersion := "2.11.7",
     Keys.scmInfo := Some(ScmInfo(
-      githubUrl(Keys.name.value),
+      gitHubUrl(Keys.name.value),
       s"scm:git:${gitUrl(Keys.name.value)}",
       Some(s"scm:git:${gitDevUrl(Keys.name.value)}")
     )),
@@ -148,7 +150,7 @@ object MdocPlugin extends AutoPlugin {
     git.useGitDescribe := true
   )
 
-  def githubUrl(projectName: String): URL =
+  def gitHubUrl(projectName: String): URL =
     url(s"https://github.com/m-doc/$projectName")
 
   def gitUrl(projectName: String): String =
