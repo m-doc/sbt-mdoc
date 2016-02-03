@@ -20,7 +20,7 @@ object MdocPlugin extends AutoPlugin {
 
       val logback = "1.1.3"
       val http4s = "0.12.0"
-      val scalacheck = "1.12.5"
+      val scalacheck = "1.13.0"
       val scalaz = "7.1.6"
       val scodecBits = "1.0.12"
     }
