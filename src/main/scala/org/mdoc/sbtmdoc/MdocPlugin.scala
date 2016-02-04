@@ -96,7 +96,7 @@ object MdocPlugin extends AutoPlugin {
       IO.write(descriptor, content)
       descriptor
     },
-    rootPackage := s"${Keys.organization.value}.${Keys.name.value}".replaceAll("-", ""),
+    rootPackage := s"${Keys.organization.value.replaceAll("-", "")}.${Keys.name.value.replaceAll("-", ".")}",
     validateCommands := Seq(
       "clean",
       "coverage",
