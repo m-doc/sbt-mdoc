@@ -1,4 +1,4 @@
-package org.mdoc.sbtmdoc
+package org.mdoc.sbt.mdoc
 
 import bintray.{ BintrayKeys, BintrayPlugin }
 import com.typesafe.sbt.GitVersioning
@@ -15,6 +15,7 @@ object MdocPlugin extends AutoPlugin {
 
   object autoImport {
     object Version {
+      val commonModel = "0.0.0"
       val fshell = "0.0.0-29-g4b0878c"
       val renderingEngines = "0.0.0-8-g867c9f3"
 
