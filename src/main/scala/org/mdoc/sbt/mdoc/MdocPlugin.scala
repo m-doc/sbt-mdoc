@@ -117,7 +117,10 @@ object MdocPlugin extends AutoPlugin {
     Keys.licenses += "Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0"),
     Keys.organization := "org.m-doc",
     Keys.publishMavenStyle := true,
-    Keys.resolvers += "m-doc/maven" at "https://dl.bintray.com/m-doc/maven",
+    Keys.resolvers ++= Seq(
+      "m-doc/maven" at "https://dl.bintray.com/m-doc/maven",
+      "fthomas/maven" at "https://dl.bintray.com/fthomas/maven"
+    ),
     Keys.scalacOptions ++= Seq(
       "-deprecation",
       "-encoding", "UTF-8",
