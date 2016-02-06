@@ -106,7 +106,7 @@ object MdocPlugin extends AutoPlugin {
         |  url("http://dl.bintray.com/content/m-doc/sbt-plugins"))(Resolver.ivyStylePatterns)
         |
         |addSbtPlugin("org.m-doc" % "sbt-mdoc" % "$version")
-      """.stripMargin.trim
+      """.stripMargin.trim + "\n"
 
       val baseDirectory = Keys.baseDirectory.in(LocalRootProject).value.getAbsolutePath
       val pluginFile = file(baseDirectory + "/project/plugin-mdoc.sbt")
