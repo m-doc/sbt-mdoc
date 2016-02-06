@@ -43,7 +43,7 @@ object MdocPlugin extends AutoPlugin {
 
   override lazy val projectSettings = Seq(
     makeBintrayCredentials := {
-      val credentialsFile = BintrayKeys.bintrayCredentialsFile.value
+      val credentialsFile = file(Path.userHome.absolutePath + "/.bintray/.credentials")
       if (!credentialsFile.exists()) {
         val user = Option(System.getenv("BINTRAY_USER")).getOrElse("")
         val pass = Option(System.getenv("BINTRAY_PASSWORD")).getOrElse("")
