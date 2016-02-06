@@ -9,6 +9,7 @@ object Library {
 
   val circeCore = "io.circe" %% "circe-core" % Version.circe
   val circeGeneric = "io.circe" %% "circe-generic" % Version.circe
+  val circeParse = "io.circe" %% "circe-parse" % Version.circe
   val http4sCirce = "org.http4s" %% "http4s-circe" % Version.http4s
   val http4sCore = "org.http4s" %% "http4s-core" % Version.http4s
   val http4sDsl = "org.http4s" %% "http4s-dsl" % Version.http4s

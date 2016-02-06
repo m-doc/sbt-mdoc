@@ -1,9 +1,9 @@
 package org.mdoc.sbt.mdoc
 
 object Version {
-  val commonModel = "0.0.0"
-  val fshell = "0.0.0-29-g4b0878c"
-  val renderingEngines = "0.0.0-8-g867c9f3"
+  val commonModel = "0.0.0-3-gb8bdeda"
+  val fshell = "0.0.0-32-g38967c8"
+  val renderingEngines = "0.0.0-13-g0997721"
 
   val circe = "0.2.0"
   val http4s = "0.12.1"
