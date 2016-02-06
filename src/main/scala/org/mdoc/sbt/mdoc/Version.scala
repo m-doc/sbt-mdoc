@@ -11,7 +11,7 @@ object Version {
   val properly = "0.0.0-18-g5fef5a3"
   val scalaLogging = "3.1.0"
   val scalacheck = "1.13.0"
-  val scalaz = "7.1.6"
+  val scalaz = "7.1.7"
   val scodecBits = "1.0.12"
   val slf4j = "1.7.14"
 }
