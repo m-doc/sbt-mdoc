@@ -31,6 +31,11 @@ object MdocPlugin extends AutoPlugin {
   }
   import autoImport._
 
+  val commandAliases = Seq(
+    addCommandAlias("mdocPublishJar", ";clean ;makeBintrayCredentials ;reload ;publish"),
+    addCommandAlias("mdocPublishDeb", ";clean ;makeBintrayDeploymentDescriptorDeb ;debian:packageBin")
+  ).flatten
+
   lazy val validateDef = Command.command("validate") { (state: State) =>
     val extracted = Project.extract(state)
     val commands = extracted.get(validateCommands)
@@ -146,7 +151,7 @@ object MdocPlugin extends AutoPlugin {
       BuildInfoKey.map(git.gitHeadCommit) { case (k, v) => k -> v.getOrElse("") }
     ),
     git.useGitDescribe := true
-  )
+  ) ++ commandAliases
 
   def gitHubUrl(projectName: String): URL =
     url(s"https://github.com/m-doc/$projectName")
