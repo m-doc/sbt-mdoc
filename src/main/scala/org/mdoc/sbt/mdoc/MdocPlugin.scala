@@ -6,7 +6,6 @@ import com.typesafe.sbt.SbtGit.git
 import com.typesafe.sbt.SbtScalariform
 import sbt._
 import sbtbuildinfo.{ BuildInfoKey, BuildInfoKeys, BuildInfoPlugin }
-import scala.util.parsing.json.JSON
 import scoverage.ScoverageSbtPlugin
 
 object MdocPlugin extends AutoPlugin {
@@ -26,9 +25,6 @@ object MdocPlugin extends AutoPlugin {
 
     val rootPackage =
       settingKey[String]("Root package.")
-
-    val updateMdocPlugin =
-      taskKey[File]("Updates sbt-mdoc to the latest version.")
 
     val validateCommands =
       settingKey[Seq[String]]("Commands that are executed by 'validate'.")
@@ -93,26 +89,6 @@ object MdocPlugin extends AutoPlugin {
       descriptor
     },
     rootPackage := Keys.organization.value.replaceAll("-", "") + "." + Keys.name.value.replaceAll("-", "."),
-    updateMdocPlugin := {
-      val credentialsFile = BintrayKeys.bintrayCredentialsFile.value
-      val credentials = bintray.BintrayCredentials.read(credentialsFile).right.get.get
-
-      val output = Seq("curl", "-s", "-u", credentials.user + ":" + credentials.password,
-        "https://api.bintray.com/packages/m-doc/sbt-plugins/sbt-mdoc/versions/_latest").!!
-
-      val version = JSON.parseFull(output).get.asInstanceOf[Map[String, Any]].get("name").get
-      val content = s"""
-        |resolvers += Resolver.url("m-doc/sbt-plugins",
-        |  url("http://dl.bintray.com/content/m-doc/sbt-plugins"))(Resolver.ivyStylePatterns)
-        |
-        |addSbtPlugin("org.m-doc" % "sbt-mdoc" % "$version")
-      """.stripMargin.trim + "\n"
-
-      val baseDirectory = Keys.baseDirectory.in(LocalRootProject).value.getAbsolutePath
-      val pluginFile = file(baseDirectory + "/project/plugin-mdoc.sbt")
-      IO.write(pluginFile, content)
-      pluginFile
-    },
     validateCommands := Seq(
       "clean",
       "coverage",

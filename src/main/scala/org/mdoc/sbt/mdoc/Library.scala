@@ -3,10 +3,6 @@ package org.mdoc.sbt.mdoc
 import sbt._
 
 object Library {
-  val commonModel = "org.m-doc" %% "common-model" % Version.commonModel
-  val fshell = "org.m-doc" %% "fshell" % Version.fshell
-  val renderingEngines = "org.m-doc" %% "rendering-engines" % Version.renderingEngines
-
   val circeCore = "io.circe" %% "circe-core" % Version.circe
   val circeGeneric = "io.circe" %% "circe-generic" % Version.circe
   val circeParse = "io.circe" %% "circe-parse" % Version.circe
