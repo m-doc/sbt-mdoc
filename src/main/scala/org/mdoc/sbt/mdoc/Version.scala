@@ -8,6 +8,6 @@ object Version {
   val scalaLogging = "3.1.0"
   val scalacheck = "1.13.0"
   val scalaz = "7.1.7"
-  val scodecBits = "1.1.0"
+  val scodecBits = "1.0.12"
   val slf4j = "1.7.14"
 }

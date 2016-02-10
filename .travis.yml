@@ -1,5 +1,31 @@
-git:
-  depth: 1000
+language: scala
+scala:
+- 2.10.6
+jdk:
+- oraclejdk8
+
+sudo: false
+addons:
+  apt:
+    packages:
+    - graphviz
+
+cache:
+  directories:
+  - "$HOME/.ivy2/cache"
+  - "$HOME/.sbt/boot/"
+
+script:
+- sbt ++$TRAVIS_SCALA_VERSION validate
+after_success:
+- |
+  [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ] &&
+  sbt ++$TRAVIS_SCALA_VERSION mdocPublishJar
+env:
+  global:
+  - secure: ZS4nqaXTPPihaFeC/4kbF22IWZxIx9/awkAGFRMcGTVqKDJHlro4bcsmSGx/o6o6+iS+ZOyPCekGKXIn0TYrAaHe0nJ83bPX70l/hCO7Oypc0vLofeJVpzDgiAZKmRZQTaOvaUamnc9H37dk/v2iqbNtEQJQiN5uDwzYVahroqbm5+Gd/VPs3WhK5cSjIVNTqPT9ZMuQRc7veCXeJ1IgNq8dwbA8y1vyq4HlU7koDwHgzYPTezZLF0uo4Gg0zbpgGcdkoUJCNcYjDwNGALvWSVGd+K+yfo6bzge3j1ffoVHbqGqz+W9nY6hU52Cy9sN4MnowCHY5Pcg7ptyIrkNeasXJTYSC4aB/VOSlAfxRRsbP6qSFodO+cPtB0J23QlRcj1g1/YD0qNaFvS5wexfVrrpJ2MAWDw9/rdNcDgV6UV+sVuVzJrCAuTjiEvO71F5uwnBlUuuDj3T2CzFi6Bgru9XmhDeOLe+Xa1ezDpcJLtLeAccj8mjIS75UsQfyA9Qg0ntZJx+f5zHpYq+S65EkEUGTK+b1xw6PVqYL3nFIHOcsa2aUs7N9KdvHSy7IkH6nr1QYKAi16bNIav8Wz9ONmMpOVnN1ks81e6MXw6kowUZFOwmi6X3TB2ofuMw8kAkFxYNCLcQKUBTkszTF4abtKE1G2wm9U0C3LULFRW7M0CA=
+  - secure: yohP8w3k7rrxU0MI32NdIr2WcwXppeA+yAhRMGpC42iRPULrqUnvbt34vLceYSkKRhlMRCzjjW0StKls8HEbYBFsr0GVZwtqM69hGfJPb9RunC0cRsJ5WIKKb25kfWeLxqGF+5CufCoJBXIXv5VRwON47TrqEtt79eLP2rbkXksaOoMLnUuyXa/3QVbUu3WSoPQuFnQ6qZj2iBty3s4ONv+1C+4XWi1RLh2yA2H/bGR2yh7OAosNsQafJc/2p8I6uNWRPPxbbSCQfjywpgKDIQmHOsWPZRcix3bGJ27h0OmavEpWIn5bx4Q3mL6TQHyZhBT+AohbzIbpvEcz0FV1vW3oXgDkUfyotO8fqnZ8PGq/F08vf8hS/gT8t6QRhIlqYJQL8OLK+soSIDmdRV/Qwwu1Vo9HQhBCtSnka7Eqz9sGvqlydiqYNZoz14BFRvJkKz9UORwHcEJchs+vwASAnqh9Mrn+/ghjLwCMNklIypW63hurDOGvv9KleUmJ1vn69GeJ6OtVXcDXdvoqt8Luic/JoTNHCmoPAGvM1iK5soNnjcFnoVN48wxREg4xlFs7LvsB7ey3UTjzKiJL0c/nXNwaq9DKe1d5hn3ySXl3kMgRh6/3AF+vI++8jgNNQxemJ6eaSdBUe6aJsCIbLzLeXOZ+4fT8DXvy36FAPy85ZjE=
+
 notifications:
   webhooks:
     urls:
@@ -7,27 +33,6 @@ notifications:
     on_success: change
     on_failure: always
     on_start: never
-language: scala
-scala:
-- 2.10.6
-jdk:
-- oraclejdk8
-sudo: false
-addons:
-  apt:
-    packages:
-    - graphviz
-cache:
-  directories:
-  - "$HOME/.ivy2/cache"
-  - "$HOME/.sbt/boot/"
-script:
-- sbt ++$TRAVIS_SCALA_VERSION validate
-after_success:
-- >
-  [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ] &&
-  sbt ++$TRAVIS_SCALA_VERSION mdocPublishJar
-env:
-  global:
-  - secure: ZS4nqaXTPPihaFeC/4kbF22IWZxIx9/awkAGFRMcGTVqKDJHlro4bcsmSGx/o6o6+iS+ZOyPCekGKXIn0TYrAaHe0nJ83bPX70l/hCO7Oypc0vLofeJVpzDgiAZKmRZQTaOvaUamnc9H37dk/v2iqbNtEQJQiN5uDwzYVahroqbm5+Gd/VPs3WhK5cSjIVNTqPT9ZMuQRc7veCXeJ1IgNq8dwbA8y1vyq4HlU7koDwHgzYPTezZLF0uo4Gg0zbpgGcdkoUJCNcYjDwNGALvWSVGd+K+yfo6bzge3j1ffoVHbqGqz+W9nY6hU52Cy9sN4MnowCHY5Pcg7ptyIrkNeasXJTYSC4aB/VOSlAfxRRsbP6qSFodO+cPtB0J23QlRcj1g1/YD0qNaFvS5wexfVrrpJ2MAWDw9/rdNcDgV6UV+sVuVzJrCAuTjiEvO71F5uwnBlUuuDj3T2CzFi6Bgru9XmhDeOLe+Xa1ezDpcJLtLeAccj8mjIS75UsQfyA9Qg0ntZJx+f5zHpYq+S65EkEUGTK+b1xw6PVqYL3nFIHOcsa2aUs7N9KdvHSy7IkH6nr1QYKAi16bNIav8Wz9ONmMpOVnN1ks81e6MXw6kowUZFOwmi6X3TB2ofuMw8kAkFxYNCLcQKUBTkszTF4abtKE1G2wm9U0C3LULFRW7M0CA=
-  - secure: yohP8w3k7rrxU0MI32NdIr2WcwXppeA+yAhRMGpC42iRPULrqUnvbt34vLceYSkKRhlMRCzjjW0StKls8HEbYBFsr0GVZwtqM69hGfJPb9RunC0cRsJ5WIKKb25kfWeLxqGF+5CufCoJBXIXv5VRwON47TrqEtt79eLP2rbkXksaOoMLnUuyXa/3QVbUu3WSoPQuFnQ6qZj2iBty3s4ONv+1C+4XWi1RLh2yA2H/bGR2yh7OAosNsQafJc/2p8I6uNWRPPxbbSCQfjywpgKDIQmHOsWPZRcix3bGJ27h0OmavEpWIn5bx4Q3mL6TQHyZhBT+AohbzIbpvEcz0FV1vW3oXgDkUfyotO8fqnZ8PGq/F08vf8hS/gT8t6QRhIlqYJQL8OLK+soSIDmdRV/Qwwu1Vo9HQhBCtSnka7Eqz9sGvqlydiqYNZoz14BFRvJkKz9UORwHcEJchs+vwASAnqh9Mrn+/ghjLwCMNklIypW63hurDOGvv9KleUmJ1vn69GeJ6OtVXcDXdvoqt8Luic/JoTNHCmoPAGvM1iK5soNnjcFnoVN48wxREg4xlFs7LvsB7ey3UTjzKiJL0c/nXNwaq9DKe1d5hn3ySXl3kMgRh6/3AF+vI++8jgNNQxemJ6eaSdBUe6aJsCIbLzLeXOZ+4fT8DXvy36FAPy85ZjE=
+
+git:
+  depth: 1000
