@@ -61,6 +61,8 @@ object MdocPlugin extends AutoPlugin {
     makeBintrayDeploymentDescriptorDeb := {
       val subject = BintrayKeys.bintrayOrganization.value.getOrElse("")
       val licenses = Keys.licenses.value.map { case (name, _) => s""""$name"""" }.mkString(", ")
+      val target = Keys.target.in(ThisProject).value
+
       val content = s"""
         |{
         |  "package": {
@@ -77,7 +79,7 @@ object MdocPlugin extends AutoPlugin {
         |  },
         |  "files": [
         |    {
-        |      "includePattern": "target/(.*${Keys.version.value}.*\\.deb)",
+        |      "includePattern": "$target/(.*${Keys.version.value}.*\\.deb)",
         |      "uploadPattern": "$$1",
         |      "matrixParams": {
         |        "deb_distribution": "stable",
