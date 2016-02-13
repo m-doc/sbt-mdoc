@@ -39,7 +39,7 @@ object MdocPlugin extends AutoPlugin {
   lazy val validateDef = Command.command("validate") { (state: State) =>
     val extracted = Project.extract(state)
     val commands = extracted.get(validateCommands)
-    state.copy(remainingCommands = commands)
+    state.copy(remainingCommands = commands ++ state.remainingCommands)
   }
 
   override lazy val projectSettings = Seq(
