@@ -92,6 +92,7 @@ object MdocPlugin extends AutoPlugin {
         |}
       """.stripMargin.trim
       val descriptor = file("deploy.json")
+      descriptor.delete()
       IO.write(descriptor, content)
       descriptor
     },
