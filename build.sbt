@@ -15,4 +15,4 @@ addSbtPlugin("org.scoverage" % "sbt-scoverage" % "1.3.5")
 publishMavenStyle := false
 bintrayRepository := "sbt-plugins"
 
-validateCommands --= Seq("coverage", "coverageReport")
+mdocValidateCommands --= Seq("coverage", "coverageReport")
