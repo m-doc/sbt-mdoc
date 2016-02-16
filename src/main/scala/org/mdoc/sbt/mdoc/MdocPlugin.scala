@@ -58,5 +58,6 @@ object MdocPlugin extends AutoPlugin {
     ExtBintray.settings ++
     ExtBuildInfo.settings ++
     ExtCommands.settings ++
-    ExtGit.settings
+    ExtGit.settings ++
+    ExtNativePackager.settings
 }
