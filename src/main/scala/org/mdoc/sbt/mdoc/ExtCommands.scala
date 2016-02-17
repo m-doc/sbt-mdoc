@@ -11,6 +11,7 @@ object ExtCommands {
       "compile",
       "test",
       "coverageReport",
+      "coverageOff",
       "scalastyle",
       "test:scalastyle",
       "doc"
