@@ -3,6 +3,7 @@ package org.mdoc.sbt.mdoc
 import sbt._
 
 object Library {
+  val bootstrap = "org.webjars" % "bootstrap" % Version.bootstrap
   val circeCore = "io.circe" %% "circe-core" % Version.circe
   val circeGeneric = "io.circe" %% "circe-generic" % Version.circe
   val circeParse = "io.circe" %% "circe-parse" % Version.circe
@@ -18,4 +19,5 @@ object Library {
   val scalazConcurrent = "org.scalaz" %% "scalaz-concurrent" % Version.scalaz
   val scalazEffect = "org.scalaz" %% "scalaz-effect" % Version.scalaz
   val scodecBits = "org.scodec" %% "scodec-bits" % Version.scodecBits
+  val webjarsPlay = "org.webjars" %% "webjars-play" % Version.webjarsPlay
 }
