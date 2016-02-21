@@ -14,6 +14,7 @@ object Library {
   val logbackClassic = "ch.qos.logback" % "logback-classic" % Version.logback
   val properly = "eu.timepit" %% "properly" % Version.properly
   val react = "org.webjars.npm" % "react" % Version.react
+  val reactDom = "org.webjars.npm" % "react-dom" % Version.react
   val scalaLogging = "com.typesafe.scala-logging" %% "scala-logging" % Version.scalaLogging
   val scalacheck = "org.scalacheck" %% "scalacheck" % Version.scalacheck
   val scalazCore = "org.scalaz" %% "scalaz-core" % Version.scalaz
