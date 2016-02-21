@@ -11,6 +11,7 @@ object Library {
   val http4sCore = "org.http4s" %% "http4s-core" % Version.http4s
   val http4sDsl = "org.http4s" %% "http4s-dsl" % Version.http4s
   val http4sBlazeServer = "org.http4s" %% "http4s-blaze-server" % Version.http4s
+  val jquery = "org.webjars.npm" % "jquery" % Version.jquery
   val logbackClassic = "ch.qos.logback" % "logback-classic" % Version.logback
   val properly = "eu.timepit" %% "properly" % Version.properly
   val react = "org.webjars.npm" % "react" % Version.react

@@ -4,6 +4,7 @@ object Version {
   val bootstrap = "3.3.6"
   val circe = "0.2.0"
   val http4s = "0.12.1"
+  val jquery = "2.2.0"
   val logback = "1.1.3"
   val properly = "0.0.0-18-g5fef5a3"
   val react = "0.14.7"
