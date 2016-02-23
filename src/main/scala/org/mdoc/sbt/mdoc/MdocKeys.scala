@@ -1,5 +1,6 @@
 package org.mdoc.sbt.mdoc
 
+import com.typesafe.sbt.packager.linux.LinuxPackageMapping
 import sbt._
 
 trait MdocKeys {
@@ -8,6 +9,9 @@ trait MdocKeys {
 
   lazy val mdocBintrayDeployJson =
     taskKey[File]("Creates a Bintray Deployment descriptor for Debian packages.")
+
+  lazy val mdocHomeDir =
+    settingKey[LinuxPackageMapping]("Mapping for the home directory of daemonUser.")
 
   lazy val mdocRootPackage =
     settingKey[String]("Root package.")
