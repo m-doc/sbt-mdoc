@@ -16,6 +16,7 @@ object ExtNativePackager {
         .withUser(user)
         .withGroup(user)
     },
+    packager.Keys.daemonUser in Linux := Keys.name.in(Debian).value,
     packager.Keys.executableScriptName := Keys.name.in(Debian).value,
     packager.Keys.maintainer := "m-doc <info@m-doc.org>",
     packager.Keys.packageName in Debian := Keys.name.in(Debian).value,
