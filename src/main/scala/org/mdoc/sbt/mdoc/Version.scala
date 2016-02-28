@@ -12,6 +12,7 @@ object Version {
   val scalacheck = "1.13.0"
   val scalaz = "7.1.7"
   val scodecBits = "1.0.12"
+  val sealerate = "0.0.3"
   val slf4j = "1.7.17"
   val webjarsPlay = "2.4.0-2"
 }

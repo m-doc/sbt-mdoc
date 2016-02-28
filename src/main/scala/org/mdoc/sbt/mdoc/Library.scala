@@ -22,5 +22,6 @@ object Library {
   val scalazConcurrent = "org.scalaz" %% "scalaz-concurrent" % Version.scalaz
   val scalazEffect = "org.scalaz" %% "scalaz-effect" % Version.scalaz
   val scodecBits = "org.scodec" %% "scodec-bits" % Version.scodecBits
+  val sealerate = "com.pellucid" %% "sealerate" % Version.sealerate
   val webjarsPlay = "org.webjars" %% "webjars-play" % Version.webjarsPlay
 }

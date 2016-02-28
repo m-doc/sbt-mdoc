@@ -24,8 +24,9 @@ object MdocPlugin extends AutoPlugin {
     Keys.organization := "org.m-doc",
     Keys.publishMavenStyle := true,
     Keys.resolvers ++= Seq(
+      "fthomas/maven" at "https://dl.bintray.com/fthomas/maven",
       "m-doc/maven" at "https://dl.bintray.com/m-doc/maven",
-      "fthomas/maven" at "https://dl.bintray.com/fthomas/maven"
+      "pellucid/maven" at "https://dl.bintray.com/pellucid/maven"
     ),
     Keys.scalacOptions ++= Seq(
       "-deprecation",
