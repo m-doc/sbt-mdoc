@@ -15,6 +15,11 @@ object MdocPlugin extends AutoPlugin {
   object autoImport extends MdocKeys {
     val Library = org.mdoc.sbt.mdoc.Library
     val Version = org.mdoc.sbt.mdoc.Version
+    val noPublishSettings = Seq(
+      Keys.publish := {},
+      Keys.publishLocal := {},
+      Keys.publishArtifact := false
+    )
   }
 
   override lazy val projectSettings = Seq(
