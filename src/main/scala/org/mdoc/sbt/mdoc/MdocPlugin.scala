@@ -52,7 +52,7 @@ object MdocPlugin extends AutoPlugin {
       "-doc-source-url", ExtGit.gitHubUrl(Keys.name.value) + "/tree/master€{FILE_PATH}.scala",
       "-sourcepath", Keys.baseDirectory.in(LocalRootProject).value.getAbsolutePath
     ),
-    Keys.scalaVersion := "2.11.7",
+    Keys.scalaVersion := "2.11.8",
     Keys.scmInfo := Some(ScmInfo(
       ExtGit.gitHubUrl(Keys.name.value),
       s"scm:git:${ExtGit.gitUrl(Keys.name.value)}",
