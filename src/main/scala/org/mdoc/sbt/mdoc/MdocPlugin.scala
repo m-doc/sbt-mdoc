@@ -1,6 +1,7 @@
 package org.mdoc.sbt.mdoc
 
 import com.typesafe.sbt.SbtScalariform
+import org.scalajs.sbtplugin.ScalaJSPlugin.autoImport._
 import sbt._
 import scoverage.ScoverageSbtPlugin
 
@@ -20,6 +21,11 @@ object MdocPlugin extends AutoPlugin {
       Keys.publishLocal := {},
       Keys.publishArtifact := false
     )
+
+    implicit final class MdocModuleIdOps(val self: ModuleID) extends AnyVal {
+      def js: Def.Initialize[ModuleID] =
+        Def.setting(self.organization %%% self.name % self.revision)
+    }
   }
 
   override lazy val projectSettings = Seq(
