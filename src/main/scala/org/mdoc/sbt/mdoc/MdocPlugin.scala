@@ -26,6 +26,9 @@ object MdocPlugin extends AutoPlugin {
       def js: Def.Initialize[ModuleID] =
         Def.setting(self.organization %%% self.name % self.revision)
     }
+
+    def addCommandsAlias(name: String, cmds: Seq[String]): Seq[Setting[State => State]] =
+      addCommandAlias(name, cmds.mkString(";", ";", ""))
   }
 
   override lazy val projectSettings = Seq(

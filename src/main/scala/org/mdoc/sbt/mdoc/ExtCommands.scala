@@ -1,5 +1,6 @@
 package org.mdoc.sbt.mdoc
 
+import org.mdoc.sbt.mdoc.MdocPlugin.autoImport.addCommandsAlias
 import sbt._
 
 object ExtCommands {
@@ -14,11 +15,13 @@ object ExtCommands {
       "coverageOff",
       "scalastyle",
       "test:scalastyle",
-      "doc"
+      "doc",
+      "package",
+      "packageSrc"
     )
   ) ++
-    addCommandAlias("mdocPublishJar", s";clean ;${MdocKeys.mdocBintrayCredentials.key.label} ;reload ;publish") ++
-    addCommandAlias("mdocPublishDeb", s";clean ;${MdocKeys.mdocBintrayDeployJson.key.label} ;debian:packageBin")
+    addCommandsAlias("mdocPublishJar", Seq("clean", MdocKeys.mdocBintrayCredentials.key.label, "reload", "publish")) ++
+    addCommandsAlias("mdocPublishDeb", Seq("clean", MdocKeys.mdocBintrayDeployJson.key.label, "debian:packageBin"))
 
   def mkCommandAlias(name: String, commandsKey: SettingKey[Seq[String]]): Command =
     Command.command(name) { (state: State) =>
