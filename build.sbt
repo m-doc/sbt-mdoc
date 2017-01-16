@@ -5,6 +5,7 @@ name := "sbt-mdoc"
 sbtPlugin := true
 scalaVersion := "2.10.6"
 
+addSbtPlugin("com.dwijnand" % "sbt-travisci" % "1.0.0")
 addSbtPlugin("com.eed3si9n" % "sbt-buildinfo" % "0.6.1")
 addSbtPlugin("com.jatescher" % "sbt-jolokia" % "1.0.0")
 addSbtPlugin("com.typesafe.sbt" % "sbt-git" % "0.8.5")
